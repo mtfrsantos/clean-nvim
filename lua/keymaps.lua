@@ -3,10 +3,10 @@
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>gq', vim.diagnostic.setloclist, { desc = 'Open dia[G]nostic [Q]uickfix list' })
+vim.keymap.set("n", "<leader>gq", vim.diagnostic.setloclist, { desc = "Open dia[G]nostic [Q]uickfix list" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -14,64 +14,64 @@ vim.keymap.set('n', '<leader>gq', vim.diagnostic.setloclist, { desc = 'Open dia[
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
-vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Resize window
-vim.keymap.set('n', '<A-h>', '<cmd>vertical resize +3<cr>', { noremap = true, desc = 'Vertical resize +3' })
-vim.keymap.set('n', '<A-l>', '<cmd>vertical resize -3<cr>', { noremap = true, desc = 'Vertical resize -3' })
-vim.keymap.set('n', '<A-k>', '<cmd>resize +3<cr>', { noremap = true, desc = 'Horizontal resize +3' })
-vim.keymap.set('n', '<A-j>', '<cmd>resize -3<cr>', { noremap = true, desc = 'Horizontal resize -3' })
+vim.keymap.set("n", "<A-h>", "<cmd>vertical resize +3<cr>", { noremap = true, desc = "Vertical resize +3" })
+vim.keymap.set("n", "<A-l>", "<cmd>vertical resize -3<cr>", { noremap = true, desc = "Vertical resize -3" })
+vim.keymap.set("n", "<A-k>", "<cmd>resize +3<cr>", { noremap = true, desc = "Horizontal resize +3" })
+vim.keymap.set("n", "<A-j>", "<cmd>resize -3<cr>", { noremap = true, desc = "Horizontal resize -3" })
 
 -- Split window
-vim.keymap.set('n', '\\', ':vsplit<cr>', { desc = 'Vertical window split' })
-vim.keymap.set('n', '-', ':split<cr>', { desc = 'Horizontal window split' })
+vim.keymap.set("n", "\\", ":vsplit<cr>", { desc = "Vertical window split" })
+vim.keymap.set("n", "-", ":split<cr>", { desc = "Horizontal window split" })
 
 -- Save buffer
-vim.keymap.set('n', '<C-s>', ':w<cr>', { desc = 'Save buffer' })
+vim.keymap.set("n", "<C-s>", ":w<cr>", { desc = "Save buffer" })
 
 -- Better navigation
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { noremap = true, desc = 'Move down on buffer' })
-vim.keymap.set('n', '<C-u>', '<C-u>zz', { noremap = true, desc = 'Move up on buffer' })
-vim.keymap.set('n', 'n', 'nzzzv', { noremap = true })
-vim.keymap.set('n', 'N', 'Nzzzv', { noremap = true })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, desc = "Move down on buffer" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, desc = "Move up on buffer" })
+vim.keymap.set("n", "n", "nzzzv", { noremap = true })
+vim.keymap.set("n", "N", "Nzzzv", { noremap = true })
 
 -- Yank and maintain register
-vim.keymap.set('x', '<leader>p', '"_dP', { noremap = true, desc = 'Yank and maintain register' })
+vim.keymap.set("x", "<leader>p", '"_dP', { noremap = true, desc = "Yank and maintain register" })
 
 -- Close current buffer
-vim.keymap.set('n', '<leader>bc', '<cmd>bw<cr>', { noremap = true, desc = '[C]lose current buffer' })
+vim.keymap.set("n", "<leader>bc", "<cmd>bw<cr>", { noremap = true, desc = "[C]lose current buffer" })
 
 -- Close current window
-vim.keymap.set('n', '<leader>q', '<cmd>q<cr>', { noremap = true, desc = 'Close current window' })
+vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { noremap = true, desc = "Close current window" })
 
 -- Diagnostics under the cursor
-vim.keymap.set('n', '<leader>gu', function()
+vim.keymap.set("n", "<leader>gu", function()
     local options = {
         focusable = false,
-        close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
-        border = 'rounded',
-        source = 'always',
-        scope = 'line',
+        close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+        border = "rounded",
+        source = "always",
+        scope = "line",
     }
     vim.diagnostic.open_float(nil, options)
-end, { noremap = true, desc = 'Dia[G]nostic [U]nder cursor' })
+end, { noremap = true, desc = "Dia[G]nostic [U]nder cursor" })
 
 -- Disable C-z suspension
-vim.keymap.set('n', '<C-z>', '<Nop>', { noremap = true, silent = true, desc = 'Disable neovim suspension' })
+vim.keymap.set("n", "<C-z>", "<Nop>", { noremap = true, silent = true, desc = "Disable neovim suspension" })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -79,21 +79,21 @@ vim.keymap.set('n', '<C-z>', '<Nop>', { noremap = true, silent = true, desc = 'D
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.hl.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-    desc = 'Highlight when yanking (copying) text',
-    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight when yanking (copying) text",
+    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
     callback = function()
         vim.hl.on_yank()
     end,
 })
 
 -- Open help window in a vertical split to the right.
-vim.api.nvim_create_autocmd('BufWinEnter', {
-    group = vim.api.nvim_create_augroup('help_window_right', {}),
-    pattern = { '*.txt' },
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    group = vim.api.nvim_create_augroup("help_window_right", {}),
+    pattern = { "*.txt" },
     callback = function()
-        if vim.o.filetype == 'help' then
-            vim.cmd.wincmd 'L'
+        if vim.o.filetype == "help" then
+            vim.cmd.wincmd("L")
         end
     end,
 })
