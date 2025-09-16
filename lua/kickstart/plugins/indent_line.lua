@@ -1,14 +1,14 @@
 return {
     { -- Add indentation guides even on blank lines
-        'lukas-reineke/indent-blankline.nvim',
+        "lukas-reineke/indent-blankline.nvim",
         -- See `:help ibl`
-        main = 'ibl',
+        main = "ibl",
         dependencies = {
-            'TheGLander/indent-rainbowline.nvim',
+            "TheGLander/indent-rainbowline.nvim",
         },
         config = function()
-            require('ibl').setup(require('indent-rainbowline').make_opts({
-                indent = { char = '▏' },
+            require("ibl").setup(require("indent-rainbowline").make_opts({
+                indent = { char = "▏" },
                 whitespace = {
                     remove_blankline_trail = false,
                 },
