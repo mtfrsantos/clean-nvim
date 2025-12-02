@@ -205,7 +205,7 @@ return {
         })
 
         -- Install python specific config
-        local debugpy_python_path = "$HOME/debugpy/.venv/bin/python3"
+        local debugpy_python_path = "$HOME/.virtualenvs/debugpy/bin/python"
         require("dap-python").setup(debugpy_python_path)
         require("dap-python").test_runner = "pytest"
         table.insert(dap.configurations.python, {
