@@ -25,23 +25,53 @@ return {
                     return nil
                 else
                     return {
-                        timeout_ms = 500,
+                        timeout_ms = 3000,
+                        lsp_fallback = true,
                         lsp_format = "fallback",
                     }
                 end
             end,
             formatters_by_ft = {
                 lua = { "stylua" },
+                nix = { "nixfmt" },
                 -- Conform can also run multiple formatters sequentially
-                python = { "black", "isort" },
+                python = { "ruff_organize_imports", "ruff_format" },
                 markdown = { "mdformat" },
                 --
                 -- You can use 'stop_after_first' to run the first available formatter from the list
                 -- javascript = { "prettierd", "prettier", stop_after_first = true },
             },
             formatters = {
-                black = {
-                    prepend_args = { "--line-length", "79" },
+                nix = {
+                    command = "nixfmt",
+                    prepend_args = { "--indent=4" },
+                },
+                ruff_organize_imports = {
+                    command = "ruff",
+                    args = {
+                        "check",
+                        "--force-exclude",
+                        "--select",
+                        "I",
+                        "--fix",
+                        "--line-length",
+                        "79",
+                        "--stdin-filename",
+                        "$FILENAME",
+                        "-",
+                    },
+                },
+                ruff_format = {
+                    command = "ruff",
+                    args = {
+                        "format",
+                        "--force-exclude",
+                        "--line-length",
+                        "79",
+                        "--stdin-filename",
+                        "$FILENAME",
+                        "-",
+                    },
                 },
             },
         },

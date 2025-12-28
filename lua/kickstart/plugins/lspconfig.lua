@@ -128,6 +128,11 @@ return {
                     --
                     -- When you move your cursor, the highlights will be cleared (the second autocommand).
                     local client = vim.lsp.get_client_by_id(event.data.client_id)
+                    -- Configure Ruff to play nice with BasedPyright
+                    if client and client.name == "ruff" then
+                        -- Disable hover in favor of Pyright
+                        client.server_capabilities.hoverProvider = false
+                    end
                     if
                         client
                         and client_supports_method(
@@ -263,6 +268,7 @@ return {
                                 autoSearchPaths = true,
                                 useLibraryCodeForTypes = true,
                                 diagnosticMode = "workspace",
+                                autoImportCompletions = true,
                             },
                         },
                     },
@@ -300,33 +306,26 @@ return {
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
                 -- linters
-                "pylint",
                 "mypy",
                 "codespell",
                 "markdownlint",
                 -- formatters
                 "stylua",
                 "prettier",
-                "isort",
-                "black",
+                "ruff",
                 "mdformat",
-                "nixfmt",
             })
             require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-            require("mason-lspconfig").setup({
-                ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-                automatic_installation = false,
-                handlers = {
-                    function(server_name)
-                        local server = servers[server_name] or {}
-                        -- This handles overriding only values explicitly passed
-                        -- by the server configuration above. Useful when disabling
-                        -- certain features of an LSP (for example, turning off formatting for ts_ls)
-                        server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-                        require("lspconfig")[server_name].setup(server)
-                    end,
-                },
-            })
+            local lspconfig_configs = require("lspconfig.configs")
+            for server_name, server_opts in pairs(servers) do
+                local default_config = lspconfig_configs[server_name] and lspconfig_configs[server_name].default_config
+                    or {}
+                local final_config = vim.tbl_deep_extend("force", default_config, server_opts)
+                final_config.capabilities =
+                    vim.tbl_deep_extend("force", {}, capabilities, final_config.capabilities or {})
+                vim.lsp.config[server_name] = final_config
+                vim.lsp.enable(server_name)
+            end
         end,
     },
 }
