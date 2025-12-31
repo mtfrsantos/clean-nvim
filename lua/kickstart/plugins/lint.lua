@@ -7,7 +7,7 @@ return {
             local lint = require("lint")
             lint.linters_by_ft = {
                 markdown = { "markdownlint", "codespell" },
-                python = { "pylint", "mypy", "codespell" },
+                python = { "pylint", "ruff", "mypy", "codespell" },
             }
             local function get_pylint_init_hook()
                 -- Check for an activated virtual environment
