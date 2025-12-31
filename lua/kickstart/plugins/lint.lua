@@ -8,6 +8,7 @@ return {
             lint.linters_by_ft = {
                 markdown = { "markdownlint", "codespell" },
                 python = { "pylint", "ruff", "mypy", "codespell" },
+                json = { "jsonlint" },
             }
             local function get_pylint_init_hook()
                 -- Check for an activated virtual environment
