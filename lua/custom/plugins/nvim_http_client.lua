@@ -23,17 +23,17 @@ return {
             },
             -- Default keybindings (can be customized)
             keybindings = {
-                select_env_file = "<leader>hf",
-                set_env = "<leader>he",
-                run_request = "<leader>hr",
-                stop_request = "<leader>hx",
-                toggle_verbose = "<leader>hv",
-                toggle_profiling = "<leader>hp",
-                dry_run = "<leader>hd",
-                copy_curl = "<leader>hc",
-                save_response = "<leader>hs",
-                set_project_root = "<leader>hg",
-                get_project_root = "<leader>hgg",
+                select_env_file = "<leader>rf",
+                set_env = "<leader>re",
+                run_request = "<leader>rr",
+                stop_request = "<leader>rx",
+                toggle_verbose = "<leader>rv",
+                toggle_profiling = "<leader>rp",
+                dry_run = "<leader>rd",
+                copy_curl = "<leader>rc",
+                save_response = "<leader>rs",
+                set_project_root = "<leader>rg",
+                get_project_root = "<leader>rgg",
             },
         })
         -- Set up Telescope integration if available
