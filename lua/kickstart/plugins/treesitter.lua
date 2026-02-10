@@ -11,6 +11,8 @@ return {
                 "c",
                 "diff",
                 "html",
+                "http",
+                "json",
                 "lua",
                 "luadoc",
                 "markdown",
