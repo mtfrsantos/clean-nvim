@@ -5,7 +5,8 @@ return {
         "nvim-neotest/nvim-nio",
     },
     keys = {
-        { "<leader>rr", "<cmd>Rest run<cr>", desc = "Run REST request" },
+        { "<leader>rr", "<cmd>Rest run<cr>", desc = "[R]un request under cursor" },
+        { "<leader>rf", "<cmd>Rest env select<cr>", desc = "Select env [F]ile" },
     },
     build = false,
     config = function()
@@ -13,6 +14,13 @@ return {
             rocks = {
                 enabled = false,
                 hererocks = false,
+            },
+            ui = {
+                winbar = true,
+                keybinds = {
+                    prev = "H",
+                    next = "L",
+                },
             },
         })
     end,
