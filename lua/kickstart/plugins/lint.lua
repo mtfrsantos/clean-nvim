@@ -1,38 +1,42 @@
 return {
-
     { -- Linting
         "mfussenegger/nvim-lint",
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             local lint = require("lint")
+            local uv = vim.uv or vim.loop
             lint.linters_by_ft = {
-                markdown = { "markdownlint", "codespell" },
                 python = { "pylint", "ruff", "mypy", "codespell" },
+                markdown = { "markdownlint", "codespell" },
                 json = { "jsonlint" },
             }
-            local function get_pylint_init_hook()
-                -- Check for an activated virtual environment
-                local venv = os.getenv("VIRTUAL_ENV")
-                if venv then
-                    local python_version = "python3.12"
-                    local site_packages = venv .. "/lib/" .. python_version .. "/site-packages"
-                    return string.format('import sys; sys.path.append("%s")', site_packages)
-                end
-                -- Fallback: Check for common venv directories in the project
-                local project_root = vim.fn.getcwd()
-                local venv_candidates = { ".venv", "venv" }
-                for _, venv_dir in ipairs(venv_candidates) do
-                    local venv_path = project_root .. "/" .. venv_dir
-                    if vim.fn.isdirectory(venv_path) == 1 then
-                        local site_packages = venv_path .. "/lib/python3.12/site-packages" -- Adjust version
-                        return string.format('import sys; sys.path.append("%s")', site_packages)
-                    end
-                end
-                return ""
+            local pylint = lint.linters.pylint
+            if not pylint then
+                return
             end
-
-            lint.linters.pylint.args = {
-                "--init-hook=" .. get_pylint_init_hook(),
+            pylint.args = {
+                function()
+                    -- All logic goes inside this function
+                    local venv = os.getenv("VIRTUAL_ENV") or (vim.fn.getcwd() .. "/.venv")
+                    local hook = ""
+                    if vim.fn.isdirectory(venv) == 1 then
+                        local lib_path = venv .. "/lib"
+                        local handle = uv.fs_scandir(lib_path)
+                        if handle then
+                            local function iter()
+                                return uv.fs_scandir_next(handle)
+                            end
+                            for name, type in iter do
+                                if type == "directory" and name:match("python") then
+                                    local site_pkgs = lib_path .. "/" .. name .. "/site-packages"
+                                    hook = "--init-hook=import sys; sys.path.append('" .. site_pkgs .. "')"
+                                    break
+                                end
+                            end
+                        end
+                    end
+                    return hook
+                end,
                 "-f",
                 "json",
                 "--from-stdin",
@@ -44,9 +48,6 @@ return {
             vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
                 group = lint_augroup,
                 callback = function()
-                    -- Only run the linter in buffers that you can modify in order to
-                    -- avoid superfluous noise, notably within the handy LSP pop-ups that
-                    -- describe the hovered symbol using Markdown.
                     if vim.bo.modifiable then
                         lint.try_lint()
                     end
