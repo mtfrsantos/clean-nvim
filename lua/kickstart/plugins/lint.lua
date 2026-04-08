@@ -29,7 +29,9 @@ return {
                             for name, type in iter do
                                 if type == "directory" and name:match("python") then
                                     local site_pkgs = lib_path .. "/" .. name .. "/site-packages"
-                                    hook = "--init-hook=import sys; sys.path.append('" .. site_pkgs .. "')"
+                                    hook = "--init-hook=import sys; sys.path.extend.extend(['"
+                                        .. site_pkgs
+                                        .. "', 'src'])"
                                     break
                                 end
                             end
