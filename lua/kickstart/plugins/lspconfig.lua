@@ -28,6 +28,10 @@ return {
 
             -- Allows extra capabilities provided by blink.cmp
             "saghen/blink.cmp",
+            {
+                url = "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+                name = "sonarlint.nvim",
+            },
         },
         config = function()
             -- Brief aside: **What is LSP?**
@@ -311,6 +315,7 @@ return {
                 "mypy",
                 "codespell",
                 "markdownlint",
+                "sonarlint-language-server",
                 -- formatters
                 "stylua",
                 "prettier",
@@ -328,6 +333,18 @@ return {
                 vim.lsp.config[server_name] = final_config
                 vim.lsp.enable(server_name)
             end
+            require("sonarlint").setup({
+                server = {
+                    cmd = {
+                        "sonarlint-language-server",
+                        "-stdio",
+                        "-analyzers",
+                        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarpython.jar"),
+                        vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjs.jar"),
+                    },
+                },
+                filetypes = { "python", "javascript", "typescript" },
+            })
         end,
     },
 }
