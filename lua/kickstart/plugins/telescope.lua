@@ -61,7 +61,7 @@ return {
                     file_ignore_patterns = { "cache", ".git", ".venv" },
                     mappings = {
                         i = {
-                            ["<c-d>"] = actions.delete_buffer,
+                            ["<c-a>"] = actions.delete_buffer,
                             ["<c-b>"] = actions.move_selection_previous,
                         },
                     },
