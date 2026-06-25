@@ -277,6 +277,17 @@ return {
                         },
                     },
                 },
+                gopls = {
+                    settings = {
+                        gopls = {
+                            analyses = {
+                                unusedparams = true,
+                            },
+                            staticcheck = true,
+                            gofumpt = true,
+                        },
+                    },
+                },
                 ts_ls = {},
                 lua_ls = {
                     -- cmd = { ... },
@@ -316,11 +327,14 @@ return {
                 "codespell",
                 "markdownlint",
                 "sonarlint-language-server",
+                "golangci-lint",
                 -- formatters
                 "stylua",
                 "prettier",
                 "ruff",
                 "mdformat",
+                "goimports",
+                "gofumpt",
             })
             require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
             local lspconfig_configs = require("lspconfig.configs")

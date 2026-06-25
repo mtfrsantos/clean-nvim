@@ -9,6 +9,7 @@ return {
                 python = { "pylint", "ruff", "mypy", "codespell" },
                 markdown = { "markdownlint", "codespell" },
                 json = { "jsonlint" },
+                go = { "golangcilint" },
             }
             local pylint = lint.linters.pylint
             if not pylint then
