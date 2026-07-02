@@ -1,10 +1,7 @@
-return {
-    "OXY2DEV/markview.nvim",
-    priority = 900,
-    lazy = false,
-    submodules = false,
-    dependencies = {
-        "saghen/blink.cmp",
-        "nvim-treesitter/nvim-treesitter",
-    },
-}
+local function gh(repo)
+    return "https://github.com/" .. repo
+end
+
+vim.pack.add({
+    gh("OXY2DEV/markview.nvim"),
+})

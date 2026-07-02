@@ -1,17 +1,18 @@
-return {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons', 'yavorski/lualine-macro-recording.nvim' },
-    config = function()
-        require('lualine').setup {
-            options = { theme = 'horizon' },
-            sections = {
-                -- lualine_x = {
-                --     {
-                --         color = { fg = '#ff9e64' },
-                --     },
-                -- },
-                lualine_c = { 'filename', 'macro_recording', '%S' },
-            },
-        }
-    end,
-}
+local function gh(repo)
+    return "https://github.com/" .. repo
+end
+
+vim.pack.add({
+    gh("nvim-lualine/lualine.nvim"),
+    gh("nvim-tree/nvim-web-devicons"),
+    gh("yavorski/lualine-macro-recording.nvim"),
+})
+
+require("lualine").setup({
+    options = {
+        theme = "horizon",
+    },
+    sections = {
+        lualine_c = { "filename", "macro_recording", "%S" },
+    },
+})

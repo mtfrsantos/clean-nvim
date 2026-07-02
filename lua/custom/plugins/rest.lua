@@ -1,27 +1,22 @@
-return {
-    "rest-nvim/rest.nvim",
-    dependencies = {
-        "nvim-treesitter/nvim-treesitter",
-        "nvim-neotest/nvim-nio",
+local function gh(repo)
+    return "https://github.com/" .. repo
+end
+
+vim.pack.add({
+    gh("rest-nvim/rest.nvim"),
+    gh("nvim-treesitter/nvim-treesitter"),
+    gh("nvim-neotest/nvim-nio"),
+})
+
+vim.keymap.set("n", "<leader>rr", "<cmd>Rest run<cr>", { desc = "[R]un request under cursor" })
+vim.keymap.set("n", "<leader>rf", "<cmd>Rest env select<cr>", { desc = "Select env [F]ile" })
+
+require("rest-nvim").setup({
+    ui = {
+        winbar = true,
+        keybinds = {
+            prev = "H",
+            next = "L",
+        },
     },
-    keys = {
-        { "<leader>rr", "<cmd>Rest run<cr>", desc = "[R]un request under cursor" },
-        { "<leader>rf", "<cmd>Rest env select<cr>", desc = "Select env [F]ile" },
-    },
-    build = false,
-    config = function()
-        require("rest-nvim").setup({
-            rocks = {
-                enabled = false,
-                hererocks = false,
-            },
-            ui = {
-                winbar = true,
-                keybinds = {
-                    prev = "H",
-                    next = "L",
-                },
-            },
-        })
-    end,
-}
+})
