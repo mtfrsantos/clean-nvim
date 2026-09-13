@@ -67,6 +67,9 @@ require("conform").setup({
                 "-",
             },
         },
+        mdformat = {
+            prepend_args = { "--wrap", "79" },
+        },
     },
 })
 

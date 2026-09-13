@@ -3,5 +3,5 @@ local function gh(repo)
 end
 
 vim.pack.add({
-    gh("OXY2DEV/markview.nvim"),
+    gh("noisesfromspace/touchup.nvim"),
 })

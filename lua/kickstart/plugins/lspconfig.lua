@@ -234,4 +234,25 @@ require("sonarlint").setup({
     filetypes = { "python", "javascript", "typescript" },
 })
 
+-- Mdformat plugin
+local registry = require("mason-registry")
+registry:on("package:install:success", function(pkg)
+    if pkg.name == "mdformat" then
+        vim.schedule(function()
+            vim.notify("Installing mdformat plugins (GFM, Frontmatter)...", vim.log.levels.INFO)
+            local install_path = pkg:get_install_path()
+            local venv_pip = install_path .. "/venv/bin/pip"
+            vim.fn.jobstart({ venv_pip, "install", "mdformat-gfm", "mdformat-frontmatter" }, {
+                on_exit = function(_, code)
+                    if code == 0 then
+                        vim.notify("mdformat plugins installed successfully!", vim.log.levels.INFO)
+                    else
+                        vim.notify("Failed to install mdformat plugins.", vim.log.levels.ERROR)
+                    end
+                end,
+            })
+        end)
+    end
+end)
+
 -- vim: ts=2 sts=2 sw=2 et
