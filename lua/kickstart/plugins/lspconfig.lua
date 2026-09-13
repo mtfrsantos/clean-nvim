@@ -122,6 +122,11 @@ local servers = {
                     useLibraryCodeForTypes = true,
                     diagnosticMode = "workspace",
                     autoImportCompletions = true,
+                    diagnosticSeverityOverrides = {
+                        reportAny = "none",
+                        reportExplicitAny = "none",
+                        reportMissingReturnType = "error",
+                    },
                 },
             },
         },
