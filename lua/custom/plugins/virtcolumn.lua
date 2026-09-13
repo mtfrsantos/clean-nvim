@@ -7,4 +7,7 @@ vim.pack.add({ gh("lukas-reineke/virt-column.nvim") })
 require("virt-column").setup({
     char = "▕",
     virtcolumn = "80,120",
+    exclude = {
+        filetypes = { "oil" },
+    },
 })
