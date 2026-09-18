@@ -5,6 +5,12 @@ end
 vim.pack.add({
     gh("stevearc/oil.nvim"),
     gh("nvim-tree/nvim-web-devicons"),
+    gh("malewicz1337/oil-git.nvim"),
+})
+
+require("oil-git").setup({
+    symbol_position = "signcolumn",
+    can_use_signcolumn = "yes:2",
 })
 
 vim.keymap.set("n", "=", "<cmd>Oil<CR>", { desc = "Open oil" })
