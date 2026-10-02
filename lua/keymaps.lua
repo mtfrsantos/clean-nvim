@@ -65,7 +65,7 @@ vim.keymap.set("n", "N", "Nzzzv", { noremap = true })
 vim.keymap.set("x", "<leader>p", '"_dP', { noremap = true, desc = "Yank and maintain register" })
 
 -- Close current buffer
-vim.keymap.set("n", "<leader>bc", "<cmd>bw<cr>", { noremap = true, desc = "[C]lose current buffer" })
+vim.keymap.set("n", "<leader>bx", "<cmd>bw<cr>", { noremap = true, desc = "[X] Close current buffer" })
 
 -- Close current window
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { noremap = true, desc = "Close current window" })
