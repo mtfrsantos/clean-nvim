@@ -15,6 +15,18 @@ require("oil-git").setup({
 
 vim.keymap.set("n", "=", "<cmd>Oil<CR>", { desc = "Open oil" })
 
+local fm_mode = os.getenv("OIL_FM_OUTPUT") ~= nil
+local fm_keymaps = fm_mode
+        and {
+            ["<CR>"] = function()
+                require("custom.oil-fm").select()
+            end,
+            ["q"] = function()
+                require("custom.oil-fm").quit()
+            end,
+        }
+    or {}
+
 local function scroll_preview(key)
     local termkey = vim.api.nvim_replace_termcodes(key, true, false, true)
     return function()
@@ -97,7 +109,7 @@ require("oil").setup({
         },
         update_on_cursor_moved = true,
     },
-    keymaps = {
+    keymaps = vim.tbl_extend("force", {
         ["<CR>"] = "actions.select",
         ["<BS>"] = "actions.parent",
         ["="] = "actions.close",
@@ -105,7 +117,7 @@ require("oil").setup({
         ["<C-p>"] = { "actions.preview", opts = { vertical = true, split = "botright" } },
         ["<C-d>"] = scroll_preview("<C-d>"),
         ["<C-u>"] = scroll_preview("<C-u>"),
-    },
+    }, fm_keymaps),
     lsp_file_methods = {
         enabled = false,
     },
