@@ -165,10 +165,7 @@ local servers = {
                     checkThirdParty = false,
                     -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
                     --  See https://github.com/neovim/nvim-lspconfig/issues/3189
-                    library = vim.tbl_extend("force", vim.api.nvim_get_runtime_file("", true), {
-                        "${3rd}/luv/library",
-                        "${3rd}/busted/library",
-                    }),
+                    library = vim.api.nvim_get_runtime_file("", true),
                 },
             })
         end,
@@ -191,6 +188,11 @@ vim.pack.add({
 
 -- Automatically install LSPs and related tools to stdpath for Neovim
 require("mason").setup({})
+
+-- Translates between nvim-lspconfig server names and mason.nvim package names (e.g. lua_ls <-> lua-language-server)
+require("mason-lspconfig").setup({
+    automatic_enable = false, -- Change to true to auto-enable servers installed manually via :Mason
+})
 
 -- Define the list of tools to be installed
 local ensure_installed = vim.tbl_keys(servers or {})
