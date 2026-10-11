@@ -15,7 +15,7 @@ require("oil-git").setup({
 
 vim.keymap.set("n", "=", "<cmd>Oil<CR>", { desc = "Open oil" })
 
--- File manager mode: active only when launched via the `fm` shell command
+-- File manager mode: active only when launched via the `o` shell command
 -- (OIL_FM_OUTPUT set). <CR> selects/enters, q quits, both route through custom.oil-fm.
 local fm_mode = os.getenv("OIL_FM_OUTPUT") ~= nil
 local fm_keymaps = fm_mode
