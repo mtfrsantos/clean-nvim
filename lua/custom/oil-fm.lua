@@ -59,7 +59,7 @@ function M.start()
             end
         end,
     })
-    require("oil").open(start)
+    require("oil").open(start, { preview = { vertical = true, split = "botright" } })
 end
 
 return M
