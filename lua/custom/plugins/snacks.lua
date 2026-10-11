@@ -25,6 +25,7 @@ require("snacks").setup({
         },
     },
     explorer = { enabled = false },
+    image = { enabled = true },
     indent = { enabled = false },
     input = { enabled = true },
     picker = { enabled = false },
@@ -34,6 +35,14 @@ require("snacks").setup({
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
+})
+
+vim.api.nvim_create_autocmd("BufModifiedSet", {
+    callback = function(args)
+        if vim.bo[args.buf].filetype == "image" then
+            vim.bo[args.buf].modified = false
+        end
+    end,
 })
 
 -- Keymaps
